@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/aerolab-challenge/static/css/main.fc8dfeef.css",
-    "main.js": "/aerolab-challenge/static/js/main.e7fe739a.js",
+    "main.css": "/aerolab-challenge/static/css/main.673dafb8.css",
+    "main.js": "/aerolab-challenge/static/js/main.397321c4.js",
     "static/media/header-x1.png": "/aerolab-challenge/static/media/header-x1.b6f067c6b4f62faf8d64.png",
     "static/media/coin.svg": "/aerolab-challenge/static/media/coin.b8bc711dc53d90c08c1393f95ad678a5.svg",
     "static/media/buy-white.svg": "/aerolab-challenge/static/media/buy-white.9b6e6567ef5a6b610e3b3f01d4cb4fab.svg",
@@ -10,11 +10,11 @@
     "static/media/arrow-left.svg": "/aerolab-challenge/static/media/arrow-left.e6eb9be1540318afe9d740498d1f5115.svg",
     "static/media/arrow-right.svg": "/aerolab-challenge/static/media/arrow-right.3306c11285a77d791eced011565fd7d6.svg",
     "index.html": "/aerolab-challenge/index.html",
-    "main.fc8dfeef.css.map": "/aerolab-challenge/static/css/main.fc8dfeef.css.map",
-    "main.e7fe739a.js.map": "/aerolab-challenge/static/js/main.e7fe739a.js.map"
+    "main.673dafb8.css.map": "/aerolab-challenge/static/css/main.673dafb8.css.map",
+    "main.397321c4.js.map": "/aerolab-challenge/static/js/main.397321c4.js.map"
   },
   "entrypoints": [
-    "static/css/main.fc8dfeef.css",
-    "static/js/main.e7fe739a.js"
+    "static/css/main.673dafb8.css",
+    "static/js/main.397321c4.js"
   ]
 }
