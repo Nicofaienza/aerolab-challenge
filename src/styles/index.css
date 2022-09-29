@@ -23,6 +23,11 @@ code {
 
 body {
   background: #ffffff;
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: hidden;
 }
 
 #loader-container {

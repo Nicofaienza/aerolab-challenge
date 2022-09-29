@@ -8,7 +8,7 @@ export const CartWrapper = styled.div`
   z-index: 100;
   top: 0;
   transition: all 0.3s ease;
-  right: ${({ open }) => (open ? "15px" : "-3000px")};
+  right: ${({ open }) => (open ? "0" : "-3000px")};
   height: 100vh;
   width: 100vw;
 
