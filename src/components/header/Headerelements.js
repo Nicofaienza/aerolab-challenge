@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "../../styles/colors.css";
 
 export const HeaderElement = styled.header`
   width: 100%;
@@ -173,7 +174,7 @@ export const CartButton = styled.button`
   border-radius: 50%;
   display: flex;
   border: none;
-  background: rgb(21, 219, 255);
+  background: var(--primary);
   align-items: center;
   justify-content: center;
   color: #fff;
@@ -206,7 +207,7 @@ export const UserButtonResponsive = styled.div`
   & > svg {
     height: 50px;
     width: 50px;
-    color: rgb(21, 219, 255);
+    color: var(--primary);
     cursor: pointer;
   }
 
@@ -243,7 +244,7 @@ export const UserInfoResponsive = styled.div`
   }
 
   & #btn-close-container > svg {
-    color: rgb(21, 219, 255);
+    color: var(--primary);
     height: 25px;
     width: 25px;
     cursor: pointer;
@@ -277,7 +278,7 @@ export const UserInfoResponsive = styled.div`
   }
 
   & div > #responsive-menu-info p svg {
-    color: rgb(21, 219, 255);
+    color: var(--primary);
   }
 
   & div > #responsive-menu-info p span {
@@ -312,7 +313,7 @@ export const UserInfoResponsive = styled.div`
     padding: 8px;
     align-items: center;
     border: none;
-    background: #15dbff;
+    background: var(--primary);
     border-radius: 5px;
     font-weight: bold;
     font-size: 16px;

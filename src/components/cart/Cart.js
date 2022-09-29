@@ -1,13 +1,34 @@
-import { Suspense, lazy } from "react";
 import { CartProductsContainer, CartWrapper, CartHeader } from "./Cartelements";
-
+import Product from "../cart/Product.js";
 import { ImCross } from "react-icons/im";
+import { useEffect } from "react";
+import { getHistory } from "../../services";
+import { useInView } from "react-intersection-observer";
 
-const Product = lazy(() => import("./Product"));
+const Cart = ({ showHistory, history, setShowHistory, setHistory }) => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
 
-const Cart = ({ showHistory, history, setShowHistory }) => {
+  useEffect(() => {
+    const loadHistory = async () => {
+      const responseHistory = await getHistory();
+      console.log("response History: ", responseHistory);
+      if (responseHistory) {
+        setHistory(responseHistory.reverse());
+      }
+    };
+
+    if (inView) {
+      console.log("view");
+      if (history.length === 0) {
+        loadHistory();
+      }
+    }
+  }, [inView]);
+
   return (
-    <CartWrapper open={showHistory}>
+    <CartWrapper ref={ref} open={showHistory}>
       <CartHeader>
         <h2>History</h2>
         <ImCross
@@ -16,12 +37,21 @@ const Cart = ({ showHistory, history, setShowHistory }) => {
           }}
         />
       </CartHeader>
-      <CartProductsContainer>
-        <Suspense fallback={<h1>Cargando...</h1>}>
-          {history.map((redeem) => (
+      <CartProductsContainer id="cart-products-container">
+        {history.length === 0 /*SPINNER*/ ? (
+          <div id="loader-container">
+            <div className="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        ) : (
+          history.map((redeem) => (
             <Product redeem={redeem} key={redeem.createDate} />
-          ))}
-        </Suspense>
+          ))
+        )}
       </CartProductsContainer>
     </CartWrapper>
   );

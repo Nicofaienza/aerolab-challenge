@@ -8,6 +8,7 @@ import {
 } from "./services/index.js";
 import "./styles/index.css";
 import { useEffect, useState } from "react";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -22,10 +23,8 @@ function App() {
     const loadData = async () => {
       const responseUser = await getUser();
       const responseProducts = await getProducts();
-      const responseHistory = await getHistory();
       console.log("response user: ", responseUser);
       console.log("response Products: ", responseProducts);
-      console.log("response History: ", responseHistory);
       if (responseUser) {
         setUser(responseUser);
         setLoading(false);
@@ -38,9 +37,6 @@ function App() {
       if (responseProducts) {
         setProducts(responseProducts);
         setLoading(false);
-      }
-      if (responseHistory) {
-        setHistory(responseHistory.reverse());
       }
     };
 
@@ -84,6 +80,7 @@ function App() {
             showMenuResponsive={showMenuResponsive}
             showHistory={showHistory}
           />
+          <Footer />
         </>
       )}
     </>

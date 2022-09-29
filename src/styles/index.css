@@ -99,3 +99,11 @@ body {
   margin: 20px auto;
   gap: 20px;
 }
+
+.not-in-view {
+  filter: opacity(0%);
+}
+
+.in-view {
+  filter: opacity(100%);
+}

@@ -3,15 +3,21 @@ import {
   CartPorductImg,
   CartProductName,
   CartProductData,
-  CartProductCategory,
   CartProductPrice,
 } from "./Cartelements";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import coin from "../../assets/icons/coin.svg";
+import { useInView } from "react-intersection-observer";
+import "../../styles/index.css";
 
 const Product = ({ redeem }) => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+
   return (
-    <CartProduct>
+    <CartProduct className={inView ? "in-view" : "not-in-view"} ref={ref}>
       <CartPorductImg id="cart-product-img">
         <img src={redeem.img.url} />
       </CartPorductImg>
@@ -20,11 +26,9 @@ const Product = ({ redeem }) => {
 
       <div id="product-info-container">
         <CartProductName id="cart-product-name">{redeem.name}</CartProductName>
-        <CartProductCategory id="cart-product-category">
-          {redeem.category}
-        </CartProductCategory>
         <CartProductData id="cart-product-data">
-          <p>Date: {redeem.createDate.slice(0, 10)}</p>
+          <p id="date">Redeem Date:</p>
+          <p>{redeem.createDate.slice(0, 10)}</p>
           <p>
             <AiOutlineClockCircle />
             {redeem.createDate.slice(11, 16)}

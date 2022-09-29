@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "../../styles/colors.css";
 
 export const CartWrapper = styled.div`
   display: flex;
@@ -7,9 +8,9 @@ export const CartWrapper = styled.div`
   z-index: 100;
   top: 0;
   transition: all 0.3s ease;
-  right: ${({ open }) => (open ? "0" : "-3000px")};
+  right: ${({ open }) => (open ? "15px" : "-3000px")};
   height: 100vh;
-  width: 80vw;
+  width: 100vw;
 
   @media screen and (max-width: 1070px) {
     width: 100vw;
@@ -27,7 +28,7 @@ export const CartHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   color: #fff;
-  background: rgb(21, 219, 255);
+  background: var(--primary);
   padding: 0 30px;
   & > h2 {
     font-size: 2rem;
@@ -43,6 +44,7 @@ export const CartHeader = styled.div`
 export const CartProductsContainer = styled.div`
   height: 100%;
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   gap: 15px;
   padding: 15px;
@@ -54,48 +56,41 @@ export const CartProductsContainer = styled.div`
 
 export const CartProduct = styled.div`
   display: flex;
-  flex-direction: column;
   position: relative;
-  padding: 10px;
+  padding: 10px 30px;
   align-items: center;
   height: max-content;
   background: #fff;
-  height: 350px;
-  width: 260px;
+  height: 150px;
+  width: 600px;
+  min-width: 350px;
+  transition: all 0.6s ease;
 
   & > #product-info-container {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
     margin: auto;
     display: flex;
+    gap: 5px;
   }
 
   & > hr {
     border: 1px solid #eee;
-    width: 60%;
+    height: 80%;
+    margin: 0 5px;
   }
 
   #cart-product-name,
   #cart-product-category,
   #cart-product-data {
-    width: 65%;
-    text-align: center;
-  }
-
-  #cart-product-img {
     width: 70%;
-  }
-
-  #cart-product-price {
-    padding: 0;
+    margin-left: 10px;
   }
 `;
 
 export const CartPorductImg = styled.div`
-  width: 35%;
+  width: 40%;
 
   & > img {
     width: 100%;
@@ -104,7 +99,6 @@ export const CartPorductImg = styled.div`
 
 export const CartProductName = styled.h2`
   font-size: 18px;
-  height: 45px;
   color: #888;
 `;
 
@@ -118,13 +112,15 @@ export const CartProductData = styled.h3`
   color: #ccc;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
 
   & > p > svg {
     position: relative;
     top: 2px;
     margin-right: 4px;
+  }
+
+  & > #date {
+    color: #888;
   }
 `;
 
@@ -132,9 +128,8 @@ export const CartProductPrice = styled.div`
   color: #888;
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  padding-right: 15px;
 
   & > img {
     width: 25px;

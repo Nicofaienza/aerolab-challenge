@@ -7,26 +7,57 @@ import {
   HomeFilterLowest,
   HomeFilterHighest,
   HomeProductsContainer,
+  HomeFilterRecent,
 } from "./Homeelements";
 import { useState, useEffect } from "react";
 import "../../styles/index.css";
 import CardProduct from "./CardProduct";
+import left from "../../assets/icons/arrow-left.svg";
+import right from "../../assets/icons/arrow-right.svg";
+import { getProducts } from "../../services";
 
 const Home = ({
   products,
   points,
   setPoints,
   setHistory,
-  user,
   showMenuResponsive,
   showHistory,
 }) => {
-  const [filter, setFilter] = useState("");
+  const initialProducts = products;
+  const [filter, setFilter] = useState("Recent");
+  const [page1, setPage1] = useState(initialProducts.slice(0, 16));
+  const [page2, setPage2] = useState(initialProducts.slice(16));
+  const [pageShow, setPageShow] = useState(0);
 
   useEffect(() => {
-    setPoints(user.points);
-  }, []);
+    console.log("effect");
+    const loadProducts = async () => {
+      const responseProducts = await getProducts();
+      console.log("load products");
+      if (responseProducts) {
+        if (filter === "Recent") {
+          setPage1(responseProducts.slice(0, 16));
+          setPage2(responseProducts.slice(16));
+        } else if (filter === "Highest") {
+          setPage1(
+            responseProducts.sort((a, b) => b.cost - a.cost).slice(0, 16)
+          );
+          setPage2(responseProducts.sort((a, b) => b.cost - a.cost).slice(16));
+        } else if (filter === "Lowest") {
+          setPage1(
+            responseProducts.sort((a, b) => a.cost - b.cost).slice(0, 16)
+          );
+          setPage2(responseProducts.sort((a, b) => a.cost - b.cost).slice(16));
+        }
+      }
+    };
+    loadProducts();
+  }, [filter]);
 
+  console.log("page1: ", page1);
+  console.log("page2: ", page2);
+  console.log("filter: ", filter);
   return (
     <HomeWrapper
       showMenuResponsive={showMenuResponsive}
@@ -41,12 +72,22 @@ const Home = ({
       <Homemenu>
         <div id="menu-wrapper">
           <HomeCount>
-            {products.length} of {products.length} products
+            {pageShow === 0 ? page1.length : products.length} of{" "}
+            {products.length} products
           </HomeCount>
           <hr />
           <HomeFiltersContainer>
             <span id="sort-by">Sort by:</span>
             <div id="filters-container">
+              <HomeFilterRecent
+                id="filter-recent"
+                filter={filter}
+                onClick={() => {
+                  setFilter("Recent");
+                }}
+              >
+                Most Recent
+              </HomeFilterRecent>
               <HomeFilterLowest
                 id="filter-lowest"
                 filter={filter}
@@ -68,47 +109,51 @@ const Home = ({
             </div>
           </HomeFiltersContainer>
         </div>
+        {pageShow === 0 ? (
+          <div className="arrow-container">
+            <p>Page 1</p>
+            <img
+              src={right}
+              onClick={() => {
+                setPageShow(1);
+              }}
+            />
+          </div>
+        ) : (
+          <div className="arrow-container">
+            <p>Page 2</p>
+            <img
+              src={left}
+              onClick={() => {
+                setPageShow(0);
+              }}
+            />
+          </div>
+        )}
       </Homemenu>
       <hr />
       <HomeProductsContainer>
-        {filter === "Lowest"
-          ? products
-              .sort((a, b) => a.cost - b.cost)
-              .map((product) => {
-                return (
-                  <CardProduct
-                    key={product._id}
-                    product={product}
-                    setPoints={setPoints}
-                    points={points}
-                    setHistory={setHistory}
-                    showHistory={showHistory}
-                  />
-                );
-              })
-          : filter === "Highest"
-          ? products
-              .sort((a, b) => b.cost - a.cost)
-              .map((product) => {
-                return (
-                  <CardProduct
-                    key={product._id}
-                    product={product}
-                    setPoints={setPoints}
-                    setHistory={setHistory}
-                    points={points}
-                    showHistory={showHistory}
-                  />
-                );
-              })
-          : products.sort().map((product) => {
+        {pageShow === 0
+          ? page1.map((product) => {
               return (
                 <CardProduct
                   key={product._id}
                   product={product}
                   setPoints={setPoints}
-                  setHistory={setHistory}
                   points={points}
+                  setHistory={setHistory}
+                  showHistory={showHistory}
+                />
+              );
+            })
+          : page2.map((product) => {
+              return (
+                <CardProduct
+                  key={product._id}
+                  product={product}
+                  setPoints={setPoints}
+                  points={points}
+                  setHistory={setHistory}
                   showHistory={showHistory}
                 />
               );

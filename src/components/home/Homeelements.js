@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import img from "../../assets/header-x1.png";
+import "../../styles/colors.css";
 
 export const HomeWrapper = styled.div`
   width: 100%;
   transition: all 0.3s ease;
   filter: blur(${({ showHistory }) => (showHistory ? "20px" : "0")});
   background: #f8f8f8;
+  padding-bottom: 15px;
 
   & > hr {
     width: 72%;
@@ -43,15 +45,31 @@ export const HomeImgContainer = styled.div`
 `;
 
 export const Homemenu = styled.div`
-  width: 100%;
-  padding: 30px 0 15px 0;
+  width: 72.5%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0 15px;
+
+  & > .arrow-container {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+
+  & > .arrow-container > p {
+    color: #888;
+  }
+
+  & > .arrow-container > img {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+  }
 
   & #menu-wrapper {
     display: flex;
     align-items: center;
-    height: 100%;
-    width: 72.5%;
-    margin: auto;
   }
 
   & > #menu-wrapper > hr {
@@ -62,6 +80,9 @@ export const Homemenu = styled.div`
 
   @media screen and (max-width: 1070px) {
     padding: 10px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 
     #menu-wrapper {
       flex-direction: column;
@@ -97,6 +118,27 @@ export const HomeFiltersContainer = styled.div`
     color: #888;
     width: 50px;
   }
+
+  @media screen and (max-width: 1070px) {
+    flex-direction: column;
+
+    & #filters-container {
+      gap: 5px;
+    }
+  }
+`;
+
+export const HomeFilterRecent = styled.span`
+  padding: 7px 14px;
+  border-radius: 20px;
+  display: block;
+  width: 120px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: ${({ filter }) =>
+    filter === "Recent" ? "var(--primary);" : "#eee;"};
+  color: ${({ filter }) => (filter === "Recent" ? "#fff" : "#888;")};
 `;
 
 export const HomeFilterLowest = styled.span`
@@ -108,7 +150,7 @@ export const HomeFilterLowest = styled.span`
   cursor: pointer;
   transition: all 0.3s ease;
   background: ${({ filter }) =>
-    filter === "Lowest" ? "rgb(21, 219, 255);" : "#eee;"};
+    filter === "Lowest" ? "var(--primary);" : "#eee;"};
   color: ${({ filter }) => (filter === "Lowest" ? "#fff" : "#888;")};
 `;
 
@@ -120,7 +162,7 @@ export const HomeFilterHighest = styled.span`
   cursor: pointer;
   transition: all 0.3s ease;
   background: ${({ filter }) =>
-    filter === "Highest" ? "rgb(21, 219, 255);" : "#eee;"};
+    filter === "Highest" ? "var(--primary);" : "#eee;"};
   color: ${({ filter }) => (filter === "Highest" ? "#fff" : "#888;")};
 `;
 
@@ -139,6 +181,7 @@ export const HomeCardProduct = styled.div`
   padding: 20px;
   box-shadow: 0 4px 6px #ccc;
   transition: all 0.3s ease;
+
   width: 300px;
 
   &:hover {
